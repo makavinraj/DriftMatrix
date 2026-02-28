@@ -1,0 +1,557 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #0d0d0d;
+    color: white;
+    overflow: hidden;
+}
+
+/* PARTICLE CANVAS */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* DASHBOARD LAYOUT */
+.dashboard {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    height: 100vh;
+}
+
+/* LEFT PANEL */
+.left-panel {
+    width: 320px;
+    background: rgba(15,15,15,0.95);
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    overflow-y: hidden;
+    padding-bottom: 14px;
+}
+
+.left-panel:hover{
+    box-shadow: 0 0 80px rgba(255,106,0,0.12);
+}
+
+/* RIGHT PANEL */
+.right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 70px;
+}
+
+.right-panel:hover {
+    box-shadow: 0 0 80px rgba(255,106,0,0.12);
+}
+
+.left-panel .header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.team-logo {
+    width: 110px;
+}
+
+.left-panel .header h1 {
+    font-size: 40px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 14px;
+    opacity: 0.6;
+    padding-left: 40px;
+    margin-top: -6px;   /* pulls it slightly closer to title */
+}
+
+.subtitle {
+    opacity: 0.6;
+    font-size: 14px;
+}
+
+.status-box {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+.stable {
+    background: #00cc66;
+}
+
+.warning {
+    background: #ffaa00;
+}
+
+.danger {
+    background: #ff0033;
+}
+
+/* GAUGE */
+.gauge-container {
+    position: relative;
+    width: 220px;
+    margin: 5px auto;
+}
+
+.gauge-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* CHAT */
+.chat-box {
+    flex: 1;
+    background: #121212;
+    padding: 20px;
+    border-radius: 15px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.message {
+    margin-bottom: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    max-width: 70%;
+}
+
+.user {
+    background: linear-gradient(135deg,#ff6a00,#ff9a3c);
+    color: black;
+    margin-left: auto;
+}
+
+.ai {
+    background: #1e1e1e;
+}
+
+.input-area {
+    display: flex;
+    gap: 10px;
+}
+
+textarea {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    resize: none;
+}
+
+button {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.decision-gate {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+/* =========================
+   🚀 SEND BUTTON (AMD STYLE)
+========================= */
+
+.send-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6a00, #ff9a3c);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 0 12px rgba(255,106,0,0.5);
+}
+
+.send-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255,106,0,0.8);
+}
+
+.send-btn:active {
+    transform: scale(0.95);
+}
+
+/* =========================
+   🎛 DECISION BUTTONS
+========================= */
+
+.decision-gate button {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s ease;
+    color: white;
+}
+
+/* ACCEPT */
+.accept-btn {
+    background: linear-gradient(135deg, #00cc66, #00ff99);
+    box-shadow: 0 0 10px rgba(0,255,153,0.4);
+}
+
+.accept-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(0,255,153,0.7);
+}
+
+/* REALIGN */
+.realign-btn {
+    background: linear-gradient(135deg, #ffaa00, #ff8800);
+    box-shadow: 0 0 10px rgba(255,170,0,0.4);
+}
+
+.realign-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(255,170,0,0.7);
+}
+
+/* REJECT */
+.reject-btn {
+    background: linear-gradient(135deg, #ff0033, #cc0022);
+    box-shadow: 0 0 10px rgba(255,0,51,0.4);
+}
+
+.reject-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(255,0,51,0.7);
+}
+
+/* =====================================
+   🔥 PREMIUM BUTTON UPGRADE SYSTEM
+===================================== */
+
+.decision-gate button,
+.send-btn {
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ===============================
+   🌊 RIPPLE EFFECT
+=============================== */
+
+.decision-gate button::after,
+.send-btn::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: rgba(255,255,255,0.4);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.decision-gate button:active::after,
+.send-btn:active::after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    from {
+        width: 0;
+        height: 0;
+        opacity: 0.6;
+    }
+    to {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+/* ===============================
+   ✨ GLASS NEON HOVER
+=============================== */
+
+.decision-gate button:hover,
+.send-btn:hover {
+    box-shadow:
+        0 0 8px rgba(255,255,255,0.1),
+        0 0 20px currentColor,
+        0 0 40px currentColor;
+}
+
+/* ===============================
+   👆 MICRO INTERACTION PRESS
+=============================== */
+
+.decision-gate button:active,
+.send-btn:active {
+    transform: scale(0.95);
+}
+
+/* ===============================
+   🌈 SMOOTH GRADIENT SHIFT
+=============================== */
+
+.accept-btn,
+.realign-btn,
+.reject-btn,
+.send-btn {
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===============================
+   ⏳ LOADING SPINNER
+=============================== */
+
+.button-loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* ===============================
+   ⏳ OVERLAY SPINNER (PREMIUM)
+=============================== */
+
+.send-btn {
+    position: relative;
+}
+
+.send-btn svg {
+    transition: opacity 0.2s ease;
+}
+
+.send-btn.button-loading svg {
+    opacity: 0.3;
+}
+
+.send-btn .spinner {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.send-btn.button-loading .spinner {
+    opacity: 1;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================
+   ✨ SPINNER PULSE GLOW
+========================================== */
+
+.send-btn.button-loading .spinner {
+    box-shadow:
+        0 0 6px rgba(255,255,255,0.6),
+        0 0 14px rgba(255,255,255,0.4),
+        0 0 22px rgba(255,255,255,0.3);
+    animation:
+        spin 0.6s linear infinite,
+        spinnerPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes spinnerPulse {
+    0% { box-shadow: 0 0 6px rgba(255,255,255,0.4); }
+    50% { box-shadow: 0 0 18px rgba(255,255,255,0.9); }
+    100% { box-shadow: 0 0 6px rgba(255,255,255,0.4); }
+}
+
+/* ==========================================
+   🚀 ROCKET THRUST BURST
+========================================== */
+
+.send-btn.launch::before {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    width: 8px;
+    height: 16px;
+    background: linear-gradient(to bottom, #ff9a3c, #ff0033);
+    border-radius: 50%;
+    filter: blur(3px);
+    animation: thrust 0.25s ease-out forwards;
+}
+
+@keyframes thrust {
+    0% {
+        transform: scaleY(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scaleY(1.8);
+        opacity: 0;
+    }
+}
+
+/* ==========================================
+   💫 LAUNCH STREAK EFFECT
+========================================== */
+
+.send-btn.launch::after {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #ff6a00, transparent);
+    top: 50%;
+    left: -60px;
+    transform: translateY(-50%);
+    animation: streak 0.35s ease-out forwards;
+}
+
+@keyframes streak {
+    0% {
+        left: -60px;
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+/* ==========================================
+   📳 MICRO VIBRATION FEEDBACK
+========================================== */
+
+.send-btn.click-feedback {
+    animation: microShake 0.15s ease;
+}
+
+@keyframes microShake {
+    0% { transform: translateX(0px); }
+    25% { transform: translateX(-1px); }
+    50% { transform: translateX(1px); }
+    75% { transform: translateX(-1px); }
+    100% { transform: translateX(0px); }
+}
+
+/* ==========================================
+   🌌 AMBIENT BACKGROUND HUM GLOW
+========================================== */
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle,
+        rgba(255,106,0,0.15),
+        transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    animation: ambientPulse 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes ambientPulse {
+    0% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+    100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ==========================================
+   🧩 FUTURISTIC HUD GRID OVERLAY
+========================================== */
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* ==========================================
+   🔵 GAUGE GLOW RING
+========================================== */
+
+.warning {
+    animation: pulseWarning 2s infinite;
+}
+
+@keyframes pulseWarning {
+    0% { box-shadow: 0 0 5px #ffaa00; }
+    50% { box-shadow: 0 0 20px #ffaa00; }
+    100% { box-shadow: 0 0 5px #ffaa00; }
+}
+
+@keyframes screenShake {
+    0% { transform: translate(0px); }
+    25% { transform: translate(-2px, 1px); }
+    50% { transform: translate(2px, -1px); }
+    75% { transform: translate(-1px, 2px); }
+    100% { transform: translate(0px); }
+}
+
+.dashboard.shake {
+    animation: screenShake 0.3s ease;
+}
+
+body.critical::before {
+    background: radial-gradient(circle,
+        rgba(255,0,51,0.3),
+        transparent 70%);
+}
+
+body {
+    animation: ambientHum 8s ease-in-out infinite;
+}
+
+@keyframes ambientHum {
+    0% { background-color: #0d0d0d; }
+    50% { background-color: #111111; }
+    100% { background-color: #0d0d0d; }
+}

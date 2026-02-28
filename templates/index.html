@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DRIFT MATRIX | Team RedChip</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<div class="dashboard">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+
+        <div class="header">
+            <img src="/static/redchip_logo.png" class="team-logo">
+            <h1>DRIFT MATRIX</h1>
+        </div>
+        <div>
+            <p class="subtitle">Real‑Time Semantic Alignment Engine</p>
+        </div>
+
+        <div class="status-box">
+            System Status:
+            <span id="system-status" class="status stable">Stable</span>
+        </div>
+
+        <div class="iteration-box">
+            Iteration:
+            <span id="iteration-count">0</span>
+        </div>
+
+        <div class="gauge-container">
+            <canvas id="gaugeChart"></canvas>
+            <div class="gauge-value">
+                <span id="drift-value">0%</span>
+            </div>
+        </div>
+
+        <div class="score-section">
+            <p>Strict Fidelity: <span id="strict-score">0%</span></p>
+            <p>Progressive Drift: <span id="prog-score">0%</span></p>
+        </div>
+
+        <p style="display:none;">Strict Weight: <span id="strict-weight">0</span></p>
+        <p style="display:none;">Progressive Weight: <span id="prog-weight">0</span></p>
+
+        <div class="graph-container">
+            <canvas id="driftChart"></canvas>
+        </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+
+        <div id="chat-box" class="chat-box"></div>
+
+        <div class="input-area">
+            <textarea id="user-input" placeholder="Type your idea..." rows="2"></textarea>
+            <button class="send-btn" onclick="sendMessage()">
+                <svg viewBox="0 0 24 24" width="18" height="18">
+                    <path fill="currentColor"
+                        d="M2 21l21-9L2 3v7l15 2-15 2z"/>
+                </svg>
+                <div class="spinner"></div>
+            </button>
+        </div>
+
+        <div class="decision-gate">
+            <button class="accept-btn" onclick="handleDecision('accept')">Accept</button>
+            <button class="realign-btn" onclick="handleDecision('realign')">Re‑Align</button>
+            <button class="reject-btn" onclick="handleDecision('reject')">Reject</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="/static/script.js?v=10"></script>
+</body>
+</html>
